@@ -43,11 +43,11 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 	 * 创建bean方法
 	 * */
 	private Object doCreateBean(String BeanName , boolean needCache) {
-		System.out.println("创建bean");
 		Object ProcesstBean = null;
 		String ClassName = null;
 		//从资源文件中获得bean的全局限定名
 		ClassName = resource.getClassName();
+		System.out.println("开始[ "+ClassName+" ]的创建");
 		//将资源存入缓存
 		ResourceCache.put(BeanName, resource);
 		//生成新的beanDef
@@ -58,7 +58,6 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 		// 解析并装配bean
 		Map<String, String> fieldValue = resource.getValueCache();
 		Field [] fields =beanDef.getFileds();
-
 		for(int i = 0 ;i <fields.length ; i++){
 			try {
 				Object requiredType =beanDef.getFiedlType(fields[i].getName());
@@ -67,9 +66,10 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 			} catch (IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalArgumentException ex) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("发生异常，异常信息: 配置文档中缺少属性[ "+fields[i].getName()+" ]");
+				ex.printStackTrace();
 			} catch (InvocationTargetException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,31 +85,34 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 	 * */
 	private Object convertToRequiredType(Object requiredType, String value) {
 		// TODO Auto-generated method stub
-		if(requiredType==String.class){
-			return value;
-		} 
-		if(requiredType == int.class){
-			return Integer.parseInt(value);
-		} 
-		if(requiredType == boolean.class){
-			return new Boolean(value);
-		} 
-		if(requiredType == double.class){
-			return Double.parseDouble(value);
-		}
-		if(requiredType == short.class){
-			return Short.parseShort(value);				
-		}
-		if(requiredType == long.class){
-			return Long.parseLong(value);
-		}
-		if(requiredType == char.class){
-			char[] temp = value.toCharArray();
-			return temp[0];
-		}if(requiredType == byte.class){
-			byte[] temp = value.getBytes();
-			return temp[0];
-		}	
+		try{
+			if(requiredType==String.class){
+				return value;
+			} 
+			if(requiredType == int.class){
+				return Integer.parseInt(value);
+			} 
+			if(requiredType == boolean.class){
+				return new Boolean(value);
+			} 
+			if(requiredType == double.class){
+				return Double.parseDouble(value);
+			}
+			if(requiredType == short.class){
+				return Short.parseShort(value);				
+			}
+			if(requiredType == long.class){
+				return Long.parseLong(value);
+			}
+			if(requiredType == char.class){
+				char[] temp = value.toCharArray();
+				return temp[0];
+			}if(requiredType == byte.class){
+				byte[] temp = value.getBytes();
+				return temp[0];
+			}}catch(Exception ex){
+				System.err.println("发生类型转换异常，异常信息:"+ex);
+			}
 		return null;
 	}
 	@Override

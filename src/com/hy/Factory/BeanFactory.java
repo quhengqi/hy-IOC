@@ -16,7 +16,7 @@ public interface BeanFactory {
 	 * */
 	public static Map<String , Object> BeanCache = new HashMap<String , Object> ();
 	/**
-	 * BeanName和对应的Resource,暂时用不到
+	 * BeanName和对应的Resource
 	 * */
 	public static Map<String ,Resource> ResourceCache = new HashMap<String , Resource>() ;
 	
