@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+<bean name="person" class="com.hengyuan.example.Person">
+	<property name="name" value="jack"/>
+</bean>
+</beans>

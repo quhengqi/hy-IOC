@@ -16,10 +16,13 @@ public interface BeanFactory {
 	 * */
 	public static Map<String , Object> BeanCache = new HashMap<String , Object> ();
 	/**
-	 * BeanName和对应的Resource
+	 * BeanName和对应的Resource,暂时用不到
 	 * */
 	public static Map<String ,Resource> ResourceCache = new HashMap<String , Resource>() ;
 	
 	public static final String SCOPE_VALUE="scope";
-	
+	/**
+	 * 从BeanCache中加载已加工Bean
+	 * */
+	public Object getBean(String BeanName);
 }

@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class BeanDifinition implements BeanDef {
 	/**
-	 * 用来存放bean的所有属性的类型
+	 * 用来存放bean的所有属性
 	 * */
-	private  Map<String,Field> fieldsMap = new HashMap<String , Field>();
+	private  Map<String,Field> fieldsType = new HashMap<String , Field>();
 	/**
 	 * 用来存放bean的所有注入方法
 	 * */
@@ -18,12 +18,40 @@ public class BeanDifinition implements BeanDef {
 	/**
 	 * 用来存放bean的所有构造器
 	 * */
+	private Object beanDifinition = null;
+	/**
+	 * 用来存放所有属性
+	 * */
+	private Field[] fields = null;
 //	//暂时不支持构造器注入
 //	private  Map<String,Constructor> constructorMap = new HashMap<String , Constructor>();
 	@Override
-	public BeanDef getBeanDef() {
-		// 返回自身
-		return this;
+	public Object getBeanDef() {
+		// 返回bean实例
+		return beanDifinition;
+	}
+	public BeanDifinition(String className){
+		init(className);
+	}	
+	public void init(String className){
+		Class<?> clazz = null;
+		try {
+			clazz = Class.forName(className);
+			beanDifinition = clazz.newInstance();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 获取所有属性
+		fields = clazz.getDeclaredFields();
+		// 存储属性名+类型操作
+		for(Field field : fields){
+			fieldsType.put(field.getName(), field);
+		}
+		Method [] methods = clazz.getDeclaredMethods();
+		for(Method method : methods){
+			methodsMap.put(method.getName(),method);
+		}
 	}
 	@Override
 	public Method getMethod(String fieldName) {
@@ -33,7 +61,20 @@ public class BeanDifinition implements BeanDef {
 	@Override
 	public Class<?> getFiedlType(String fieldName) {
 		// 返回属性的类型
-		return fieldsMap.get(fieldName).getType();
+		return fieldsType.get(fieldName).getType();
 	}
-
+	/**
+	 * 属性值到方法名的转换
+	 * @param=age
+	 * @return=setAge
+	 * */
+	public String convertFieldNameToMethodName(String name){
+		return new StringBuilder("set").append((name.charAt(0)+"").toUpperCase()
+				+name.substring(1, name.length())).toString();
+	}
+	@Override
+	public Field[] getFileds() {
+		// TODO Auto-generated method stub
+		return this.fields;
+	}
 }
