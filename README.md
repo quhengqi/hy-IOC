@@ -1,5 +1,4 @@
 # hy-IOC
-New IOC
 A Personal IOC Tools 
 1.Only support deployed by properties;
 2.Only support load a Class; 
