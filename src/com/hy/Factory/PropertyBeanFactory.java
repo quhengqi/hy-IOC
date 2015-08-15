@@ -27,7 +27,7 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 				return  bean != null?bean:doCreateBean(BeanName,true);
 			}
 		}
-		return doCreateBean(BeanName,false);
+		return doCreateBean(BeanName,true);
 	}
 	public PropertyBeanFactory(String configPath){
 		//初始化资源
@@ -51,7 +51,7 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 		//将资源存入缓存
 		ResourceCache.put(BeanName, resource);
 		//生成新的beanDef
-		beanDef = new BeanDifinition(ClassName);
+		beanDef =	new BeanDifinition(ClassName);
 		ProcesstBean = beanDef.getBeanDef();
 		//将原始形态的bean存入缓存
 		BeanDefCache.put(BeanName, beanDef);
