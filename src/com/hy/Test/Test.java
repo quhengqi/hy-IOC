@@ -1,8 +1,9 @@
 package com.hy.Test;
 
+
 import com.hy.Factory.BeanFactory;
 import com.hy.Factory.PropertyBeanFactory;
-import com.hy.Reader.PropertySourceReader;
+import com.hy.Reader.SourceReader;
 import com.hy.Source.PropertyResource;
 
 public class Test {
@@ -12,7 +13,7 @@ public class Test {
 		Person p1 = (Person)factory.getBean("person");
 		System.out.println("p1="+p1);
 		p();
-		BeanFactory factory2 = new PropertyBeanFactory(new PropertyResource(new PropertySourceReader(PersonPath)));
+		BeanFactory factory2 = new PropertyBeanFactory(new PropertyResource(new SourceReader(PersonPath)));
 		Person p2 = (Person)factory2.getBean("person");
 		System.out.println("p2="+p2);
 		p();

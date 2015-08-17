@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@SuppressWarnings("static-access")
 public class BeanDifinition implements BeanDef {
 	/**
 	 * 用来存放bean的所有属性

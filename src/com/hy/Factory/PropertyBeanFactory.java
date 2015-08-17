@@ -9,7 +9,7 @@ import com.hy.Bean.BeanDifinition;
 import com.hy.Source.PropertyResource;
 import com.hy.Source.Resource;
 
-@SuppressWarnings("static-access")
+
 public class PropertyBeanFactory implements DefaultBeanFactory{
 	//bean结构
 	private BeanDef beanDef = null;

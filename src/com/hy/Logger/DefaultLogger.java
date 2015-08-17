@@ -14,7 +14,7 @@ public class DefaultLogger implements Logger{
 	public static void setLock(boolean show) {
 		DefaultLogger.show = show;
 	}
-	public static void log(String str){
+	public void log(String str){
 		if(show){
 			System.out.println("LOG:"+str);
 		}

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans>
-<bean name="person" class="com.hengyuan.example.Person">
+<bean name="person" class="com.hengyuan.example.Person" scope="singleton">
 	<property name="name" value="jack"/>
+	<property name="flag" value="true"/>
+	<property name="money" value="123465"/>
+	<property name="date" value="20150809123456"/>
+	<property name="ID" value="12345"/>
+	<property name="age" value="123"/>
+	<property name="sex" value="M"/>
+	<property name="buffer" value="a"/>
+	<property name="111" value="222"/>
 </bean>
-</beans>

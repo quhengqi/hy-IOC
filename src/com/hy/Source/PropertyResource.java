@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import com.hy.Reader.PropertySourceReader;
 import com.hy.Reader.SourceReader;
-@SuppressWarnings("static-access")
+import com.hy.Reader.Reader;
+
 public class PropertyResource implements Resource{
 	/**
 	 * 资源读取器
@@ -16,7 +16,7 @@ public class PropertyResource implements Resource{
 	/**
 	 * 	资源流加载器
 	 * */
-	private SourceReader reader;
+	private Reader reader;
 	/**
 	 * Property+Value缓存
 	 * */
@@ -41,15 +41,15 @@ public class PropertyResource implements Resource{
 	 * 如果使用资源加载器创建新的实例
 	 * 传入该资源加载器以避免二次创建资源加载器
 	 * */
-	public PropertyResource(SourceReader exitReader){
+	public PropertyResource(Reader exitReader){
 		this(exitReader.getConfigPath() ,false, exitReader);
 
 	}
 
-	private PropertyResource(String configPath,boolean needCreateReader,SourceReader exitReader){
+	private PropertyResource(String configPath,boolean needCreateReader,Reader exitReader){
 		this();
 		if(needCreateReader){
-			reader = new PropertySourceReader(configPath);
+			reader = new SourceReader(configPath);
 		}else{
 			reader = exitReader;
 		}

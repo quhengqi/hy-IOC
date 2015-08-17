@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bean name="person" class="com.hengyuan.example.Person" scope="singleton">
-	<property name="name" value="jack"/>
+	<property name="name" >"jack"</property>
 	<property name="flag" value="true"/>
 	<property name="money" value="123465"/>
 	<property name="date" value="20150809123456"/>
