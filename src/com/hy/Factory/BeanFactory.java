@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hy.Bean.BeanDef;
+import com.hy.Logger.Logger;
 import com.hy.Source.Resource;
 
-public interface BeanFactory {
+public interface BeanFactory  extends Logger{
 	/**
 	 * BeanName和Bean结构
 	 * */

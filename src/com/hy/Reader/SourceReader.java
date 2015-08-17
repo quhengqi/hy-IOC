@@ -2,13 +2,23 @@ package com.hy.Reader;
 
 import java.io.InputStream;
 
-public interface SourceReader {
+import com.hy.Logger.Logger;
+
+public interface SourceReader extends Logger{
 /**
  * 获取加载类的资源流
  * */
 public InputStream getStream();
 /**
- * 绑定资源
+ * 绑定资源路径
  * */
 public void bingConfigPath(String Path);
+/**
+ * 返回资源路径
+ * */
+public String getConfigPath();
+/**
+ * 关闭资源流
+ * */
+public void closeIO();
 }

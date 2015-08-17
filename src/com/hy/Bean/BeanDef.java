@@ -3,7 +3,9 @@ package com.hy.Bean;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public interface BeanDef {
+import com.hy.Logger.Logger;
+
+public interface BeanDef extends Logger{
 	/**
 	 * 获取未加工bean实例
 	 * */

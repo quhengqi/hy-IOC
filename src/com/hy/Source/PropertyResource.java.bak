@@ -46,7 +46,7 @@ public class PropertyResource implements Resource{
 
 	}
 
-	private PropertyResource(String configPath,SourceReader exitReader){
+	public PropertyResource(String configPath,SourceReader exitReader){
 		this();
 		if(exitReader == null){
 			reader = new PropertySourceReader(configPath);

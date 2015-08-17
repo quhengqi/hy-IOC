@@ -9,6 +9,7 @@ import com.hy.Bean.BeanDifinition;
 import com.hy.Source.PropertyResource;
 import com.hy.Source.Resource;
 
+@SuppressWarnings("static-access")
 public class PropertyBeanFactory implements DefaultBeanFactory{
 	//bean结构
 	private BeanDef beanDef = null;
@@ -22,22 +23,53 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 				return doCreateBean(BeanName,false);
 			}else{
 				// 如果scope的值为singleton,优先加载缓存,否则创建新的bean
-				System.out.println("加载缓存");
 				Object bean = BeanCache.get(BeanName);
-				return  bean != null?bean:doCreateBean(BeanName,true);
+				if(bean != null){
+					logger.log("从BeanCache缓存中加载bean");
+					return bean;
+				}
+				return doCreateBean(BeanName,true);
 			}
 		}
 		return doCreateBean(BeanName,true);
 	}
-	public PropertyBeanFactory(String configPath){
-		//初始化资源
-		init(configPath);
+	public PropertyBeanFactory(){
+		logger.log("创建新的工厂"+this);
 	}
 	/**
-	 * 初始化方法
+	 * 如果是直接使用configPath创建
+	 * 则不传入资源
 	 * */
-	private void init(String configPath) {
-		resource = new PropertyResource(configPath);
+	public PropertyBeanFactory(String configPath){
+		//初始化资源
+		this(configPath,true,null);
+	}
+	/**
+	 * 如果使用资源创建新的实例
+	 * 传入该资源以避免二次创建资源
+	 * */
+	public PropertyBeanFactory(Resource  exitResource){
+		//初始化资源
+		this	(exitResource.getConfigPath(),false,exitResource);
+	}
+
+	/**
+	 * 初始化构造器
+	 * */
+	private PropertyBeanFactory(String configPath , boolean needCreateResource , Resource  exitResource) {
+		this();
+		if(needCreateResource){
+			if(resource == null && getResource(configPath) == null){
+				//将资源存入缓存
+				resource = new PropertyResource(configPath);
+				ResourceCache.put(resource.getBeanName(), resource);
+			}else{
+				resource = getResource(resource.getBeanName());
+				logger.log("从ResourceCache中加载资源"+configPath);
+			}
+		}else{
+			resource = exitResource;
+		}
 	}
 	/**
 	 * 创建bean方法
@@ -47,9 +79,7 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 		String ClassName = null;
 		//从资源文件中获得bean的全局限定名
 		ClassName = resource.getClassName();
-		System.out.println("开始[ "+ClassName+" ]的创建");
-		//将资源存入缓存
-		ResourceCache.put(BeanName, resource);
+		logger.log("开始[ "+ClassName+" ]的创建");
 		//生成新的beanDef
 		beanDef =	new BeanDifinition(ClassName);
 		ProcesstBean = beanDef.getBeanDef();

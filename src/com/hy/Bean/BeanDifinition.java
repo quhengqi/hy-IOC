@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@SuppressWarnings("static-access")
 public class BeanDifinition implements BeanDef {
 	/**
 	 * 用来存放bean的所有属性
@@ -38,6 +40,7 @@ public class BeanDifinition implements BeanDef {
 		try {
 			clazz = Class.forName(className);
 			beanDifinition = clazz.newInstance();
+			logger.log("实例化[ "+beanDifinition.getClass().getName()+" ]成功");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

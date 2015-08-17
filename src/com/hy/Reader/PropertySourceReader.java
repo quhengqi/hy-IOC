@@ -1,7 +1,8 @@
 package com.hy.Reader;
 
+import java.io.IOException;
 import java.io.InputStream;
-
+@SuppressWarnings("static-access")
 public class PropertySourceReader implements SourceReader {
 	/**
 	 * 资源路径
@@ -15,11 +16,13 @@ public class PropertySourceReader implements SourceReader {
 	 * 默认构造器
 	 * */
 	public PropertySourceReader(){
+		logger.log("创建新的资源加载器"+this);
 	}
 	/**
 	 * 非默认构造器
 	 * */
 	public PropertySourceReader(String configPath){
+		this();
 		bingConfigPath(configPath);
 		init();
 	}
@@ -33,6 +36,7 @@ public class PropertySourceReader implements SourceReader {
 		catch(Exception ex){
 			System.out.println("资源加载发生异常,请检查路径["+configPath+"]是否填写正确");
 		}
+		logger.log("读取配置 ["+configPath+" ]成功");
 	}
 	@Override
 	public InputStream getStream() {
@@ -47,5 +51,20 @@ public class PropertySourceReader implements SourceReader {
 	public void bingConfigPath(String configPath) {
 		// TODO Auto-generated method stub
 		this.configPath = configPath;
+	}
+	@Override
+	public String getConfigPath() {
+		return this.configPath;
+	}
+	@Override
+	public void closeIO() {
+		// 判空操作
+		if(is!= null)
+			try {
+				is.close();
+				logger.log("已关闭资源流");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 }
