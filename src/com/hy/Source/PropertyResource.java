@@ -27,14 +27,14 @@ public class PropertyResource implements Resource{
 	public PropertyResource(){
 		property = new Properties();
 		ValueCache = new HashMap<String , String>();
-		logger.log("创建新的资源:"+this);
+		logger.log("创建新的资源Bean:"+this);
 	}
 	/**
 	 * 如果是直接使用configPath创建
 	 * 则不传入资源加载器
 	 * */
 	public PropertyResource(String configPath){
-		this(configPath ,null);
+		this(configPath,true ,null);
 
 	}
 	/**
@@ -42,14 +42,21 @@ public class PropertyResource implements Resource{
 	 * 传入该资源加载器以避免二次创建资源加载器
 	 * */
 	public PropertyResource(SourceReader exitReader){
-		this(exitReader.getConfigPath() , exitReader);
+		this(exitReader.getConfigPath() ,false, exitReader);
 
 	}
 
-	private PropertyResource(String configPath,SourceReader exitReader){
+	private PropertyResource(String configPath,boolean needCreateReader,SourceReader exitReader){
 		this();
-		if(exitReader == null){
-			reader = new PropertySourceReader(configPath);
+		if(needCreateReader){
+			if(getReader(configPath) == null){
+				//将资源存入缓存
+				reader = new PropertySourceReader(configPath);
+				ReaderCache.put(configPath, reader);
+			}else{
+				reader = getReader(configPath);
+				logger.log("从ReaderCache中加载资源加载器"+reader);
+			}
 		}else{
 			reader = exitReader;
 		}
@@ -67,7 +74,6 @@ public class PropertyResource implements Resource{
 			e.printStackTrace();
 		}finally{
 			logger.log("资源[ "+configPath+" ]加载成功");
-			reader.closeIO();
 		}
 	}
 	@Override
@@ -116,5 +122,10 @@ public class PropertyResource implements Resource{
 	public String getBeanName() {
 		// TODO Auto-generated method stub
 		return ValueCache.get("beanName");
+	}
+	@Override
+	public SourceReader getReader(String configPath) {
+		// TODO Auto-generated method stub
+		return ReaderCache.get(configPath);
 	}
 }

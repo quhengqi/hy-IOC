@@ -16,7 +16,7 @@ public class PropertySourceReader implements SourceReader {
 	 * 默认构造器
 	 * */
 	public PropertySourceReader(){
-		logger.log("创建新的资源加载器"+this);
+		logger.log("创建新的资源加载器Bean:"+this);
 	}
 	/**
 	 * 非默认构造器

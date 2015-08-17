@@ -34,7 +34,7 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 		return doCreateBean(BeanName,true);
 	}
 	public PropertyBeanFactory(){
-		logger.log("创建新的工厂"+this);
+		logger.log("创建新的工厂Bean:"+this);
 	}
 	/**
 	 * 如果是直接使用configPath创建
@@ -59,7 +59,7 @@ public class PropertyBeanFactory implements DefaultBeanFactory{
 	private PropertyBeanFactory(String configPath , boolean needCreateResource , Resource  exitResource) {
 		this();
 		if(needCreateResource){
-			if(resource == null && getResource(configPath) == null){
+			if(getResource(configPath) == null){
 				//将资源存入缓存
 				resource = new PropertyResource(configPath);
 				ResourceCache.put(resource.getBeanName(), resource);

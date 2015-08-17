@@ -1,5 +1,6 @@
 package com.hy.Source;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.hy.Logger.Logger;
@@ -26,4 +27,12 @@ public interface Resource extends Logger{
 	 * 获取加载路径
 	 * */
 	public String getConfigPath();
+	/**
+	 * BeanName和对应的SourceReader
+	 * */
+	public static Map<String ,SourceReader> ReaderCache = new HashMap<String , SourceReader>() ;
+	/**
+	 * 从ReaderCache中返回Reader
+	 * */
+	public SourceReader getReader(String configPath);
 }
