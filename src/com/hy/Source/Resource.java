@@ -1,10 +1,8 @@
 package com.hy.Source;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.hy.Logger.Logger;
-import com.hy.Reader.SourceReader;
 
 public interface Resource extends Logger{
 	/**
@@ -20,19 +18,7 @@ public interface Resource extends Logger{
 	 * */
 	public Map<String , String> getValueCache();
 	/**
-	 * 绑定资源加载器
-	 * */
-	public void bindReader(SourceReader reader);
-	/**
 	 * 获取加载路径
 	 * */
 	public String getConfigPath();
-	/**
-	 * BeanName和对应的SourceReader
-	 * */
-	public static Map<String ,SourceReader> ReaderCache = new HashMap<String , SourceReader>() ;
-	/**
-	 * 从ReaderCache中返回Reader
-	 * */
-	public SourceReader getReader(String configPath);
 }

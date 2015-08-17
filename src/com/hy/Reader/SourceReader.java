@@ -10,10 +10,6 @@ public interface SourceReader extends Logger{
  * */
 public InputStream getStream();
 /**
- * 绑定资源路径
- * */
-public void bingConfigPath(String Path);
-/**
  * 返回资源路径
  * */
 public String getConfigPath();

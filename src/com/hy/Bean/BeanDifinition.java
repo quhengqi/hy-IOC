@@ -27,10 +27,12 @@ public class BeanDifinition implements BeanDef {
 	private Field[] fields = null;
 //	//暂时不支持构造器注入
 //	private  Map<String,Constructor> constructorMap = new HashMap<String , Constructor>();
+	/**
+	 * 返回bean结构
+	 * */
 	@Override
 	public Object getBeanDef() {
-		// 返回bean实例
-		return beanDifinition;
+		return this.beanDifinition;
 	}
 	public BeanDifinition(String className){
 		init(className);

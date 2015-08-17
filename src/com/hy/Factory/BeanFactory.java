@@ -23,7 +23,7 @@ public interface BeanFactory  extends Logger{
 	
 	public static final String SCOPE_VALUE="scope";
 	/**
-	 * 从BeanCache中加载已加工Bean
+	 * 获取名字为BeanName的bean实例
 	 * */
 	public Object getBean(String BeanName);
 }

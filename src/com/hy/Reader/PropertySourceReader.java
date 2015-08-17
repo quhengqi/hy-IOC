@@ -23,7 +23,7 @@ public class PropertySourceReader implements SourceReader {
 	 * */
 	public PropertySourceReader(String configPath){
 		this();
-		bingConfigPath(configPath);
+		this.configPath =configPath;
 		init();
 	}
 	/**
@@ -45,12 +45,6 @@ public class PropertySourceReader implements SourceReader {
 			init();
 		}
 		return is;
-	}
-
-	@Override
-	public void bingConfigPath(String configPath) {
-		// TODO Auto-generated method stub
-		this.configPath = configPath;
 	}
 	@Override
 	public String getConfigPath() {
