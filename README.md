@@ -1,9 +1,7 @@
 # hy-IOC
-A Personal IOC Tools 
-1.Only support deployed by properties;
-2.Only support load a Class; 
-3.Only support inject not by construtor but setter/getter methods; 
-4.Only support scope value in {singleton , prototype}; 
-5.Only support basic types and String ; 
-6.Finish cache function because with global container; 
-7.Tt won't reload all properties when the scope-field's value is prototype beacause we have cache function;
+个人DI工具
+1.仅支持Property文件配置
+2.仅支持Setter方法属性注入
+3.仅支持Scope属性值为{singleton , prototype}
+4.仅支持JAVA的基本类型及String类型值
+5.具有缓存功能，所以部分加载过程可以提高效率
