@@ -51,10 +51,12 @@ public class XMLResource implements Resource {
 
 	}
 
+	@SuppressWarnings("unused")
 	private XMLResource(String configPath,boolean needCreateReader,Reader exitReader){
 		try {
 			document = reader.read(new File(configPath));
-			 Element root = document.getRootElement();
+			Element root = document.getRootElement();
+
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

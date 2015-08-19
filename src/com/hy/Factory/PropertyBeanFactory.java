@@ -2,6 +2,7 @@ package com.hy.Factory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.hy.Bean.BeanDef;
@@ -11,6 +12,10 @@ import com.hy.Source.Resource;
 
 
 public class PropertyBeanFactory implements DefaultBeanFactory{
+	/**
+	 * BeanName和对应的Resource
+	 * */
+	public static Map<String ,Resource> ResourceCache = new HashMap<String , Resource>() ;
 	//bean结构
 	private BeanDef beanDef = null;
 	//bean资源

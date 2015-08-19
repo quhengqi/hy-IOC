@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.hy.Bean.BeanDef;
 import com.hy.Logger.Logger;
-import com.hy.Source.Resource;
 
 public interface BeanFactory  extends Logger{
 	/**
@@ -16,10 +15,6 @@ public interface BeanFactory  extends Logger{
 	 * BeanName和成品Bean
 	 * */
 	public static Map<String , Object> BeanCache = new HashMap<String , Object> ();
-	/**
-	 * BeanName和对应的Resource
-	 * */
-	public static Map<String ,Resource> ResourceCache = new HashMap<String , Resource>() ;
 	
 	public static final String SCOPE_VALUE="scope";
 	/**
